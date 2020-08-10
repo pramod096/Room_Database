@@ -1,6 +1,7 @@
 package pramod.com.roomdatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText name,age;
     private TextView result;
 
+    private PersonDatabase pd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         age = findViewById(R.id.age);
         result = findViewById(R.id.result);
+
+        pd = Room.databaseBuilder(this, PersonDatabase.class, "pramod")
+                .allowMainThreadQueries()
+                .build();
     }
 
     public void saveData(View view) {
