@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         pd = Room.databaseBuilder(this, PersonDatabase.class, "pramod")
                 .allowMainThreadQueries()
                 .build();
+
+        getData();
     }
 
     public void saveData(View view) {
