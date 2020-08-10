@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,5 +35,19 @@ public class MainActivity extends AppCompatActivity {
     public void saveData(View view) {
         String n = name.getText().toString();
         int a = Integer.parseInt(age.getText().toString());
+
+        Person p = new Person(n, a);
+        pd.personDAO().insert(p);
+        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+        getData();
+    }
+
+    private void getData() {
+        result.setText("");
+        List<Person> list = pd.personDAO().getAllData();
+        if(list!=null)
+            for(Person p : list){
+                result.append(p.getId()+ " " + p.getName() + " " + p.getAge()+"\n");
+            }
     }
 }
